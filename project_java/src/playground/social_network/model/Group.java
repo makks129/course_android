@@ -1,4 +1,4 @@
-package lesson3.teacher.social_network_tools;
+package playground.social_network.model;
 
 public class Group {
 

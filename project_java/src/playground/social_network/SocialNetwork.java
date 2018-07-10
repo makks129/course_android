@@ -1,7 +1,7 @@
-package lesson3.teacher.social_network;
+package playground.social_network;
 
-import lesson3.teacher.social_network_tools.Group;
-import lesson3.teacher.social_network_tools.Person;
+import playground.social_network.model.Group;
+import playground.social_network.model.Person;
 
 public class SocialNetwork {
 
