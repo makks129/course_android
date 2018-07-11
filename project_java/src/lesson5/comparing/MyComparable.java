@@ -1,7 +1,7 @@
 package lesson5.comparing;
 
-public interface MyComparable {
+public interface MyComparable<T> {
 
-    int compareTo(Object o);
+    int compareTo(T o);
 
 }

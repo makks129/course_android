@@ -13,4 +13,14 @@ public class Button {
         listener.onClick();
     }
 
+    public void onLongClick() {
+        // called by the system
+        listener.onLongClick();
+    }
+
+    public interface OnButtonClickListener {
+        void onClick();
+        void onLongClick();
+    }
+
 }

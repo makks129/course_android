@@ -1,7 +1,9 @@
 package lesson5.comparing;
 
-public interface MyComparator {
+public interface MyComparator<T> {
 
-    int compare(Object o1, Object o2);
+    int compare(T o1, T o2);
+
+
 
 }

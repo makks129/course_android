@@ -1,6 +1,8 @@
 package playground.geometry;
 
-public class Circle extends GeometricObject {
+import lesson5.comparing.MyComparable;
+
+public class Circle extends GeometricObject implements MyComparable<Circle> {
 
     private int radius;
 
@@ -21,4 +23,8 @@ public class Circle extends GeometricObject {
         this.radius = radius;
     }
 
+    @Override
+    public int compareTo(Circle o) {
+        return (int) (getArea() - o.getArea());
+    }
 }
