@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">GeoQuiz</string>
+    <string name="question">Question?</string>
+    <string name="text_true">True</string>
+    <string name="text_false">False</string>
+    <string name="question1">Is Moscow the capital of Russia?</string>
+    <string name="question2">Is London the capital of Germany?</string>
+    <string name="question3">Is Paris the capital of Europe?</string>
+
+
+
+
+</resources>
