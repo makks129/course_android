@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="vertical"
         android:gravity="center"
+        android:layout_gravity="center"
         >
 
         <TextView
@@ -46,42 +46,34 @@
                 android:layout_marginStart="8dp"
                 />
 
-            <Button
-                android:id="@+id/actionCheat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_cheat"
-                android:layout_marginStart="8dp"
-                />
-
         </LinearLayout>
 
+    </LinearLayout>
 
-        <LinearLayout
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom|end"
+        >
+
+        <Button
+            android:id="@+id/actionPrevious"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
-            >
+            android:text="@string/previous"
+            />
 
-            <Button
-                android:id="@+id/actionPrevious"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/previous"
-                />
-
-            <Button
-                android:id="@+id/actionNext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/next"
-                android:layout_marginStart="8dp"
-                />
-
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/actionNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:layout_marginStart="8dp"
+            />
 
     </LinearLayout>
 
