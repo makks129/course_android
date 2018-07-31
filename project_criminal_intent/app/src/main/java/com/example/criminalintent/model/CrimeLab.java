@@ -3,6 +3,7 @@ package com.example.criminalintent.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 public class CrimeLab {
 
@@ -28,5 +29,34 @@ public class CrimeLab {
         }
     }
 
+    public Crime getCrime(UUID crimeId) {
+        for (Crime crime : crimes) {
+            if (crime.getUuid().equals(crimeId)) {
+                return crime;
+            }
+        }
+        return null;
+    }
 
+    public int getCrimeIndex(UUID crimeId) {
+        for (int i = 0; i < crimes.size(); i++) {
+            Crime crime = crimes.get(i);
+            if (crime.getUuid().equals(crimeId)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public void addCrime(Crime crime) {
+        crimes.add(crime);
+    }
+
+    public List<Crime> getCrimes() {
+        return crimes;
+    }
+
+    public void setCrimes(List<Crime> crimes) {
+        this.crimes = crimes;
+    }
 }

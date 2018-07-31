@@ -12,6 +12,9 @@ public class Crime {
 
     public Crime() {
         uuid = UUID.randomUUID();
+        title = "";
+        calendar = Calendar.getInstance();
+        solved = false;
     }
 
     public UUID getUuid() {

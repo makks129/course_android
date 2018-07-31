@@ -1,14 +1,13 @@
-package com.example.criminalintent.controller;
+package com.example.criminalintent.controller.activity.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.criminalintent.R;
 
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class SingleFragmentActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +18,12 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
         if (fragment == null) {
             fm.beginTransaction()
-                    .add(R.id.fragmentContainer, createFragment())
+                    .add(R.id.fragmentContainer, createFragment(getIntent()))
                     .commit();
         }
 
     }
 
-    protected abstract Fragment createFragment();
+    protected abstract Fragment createFragment(Intent intent);
 
 }
