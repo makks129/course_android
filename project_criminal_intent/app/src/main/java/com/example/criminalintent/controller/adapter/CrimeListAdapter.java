@@ -23,13 +23,12 @@ import java.util.List;
  */
 public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.ViewHolder> {
 
-    private List<Crime> items;
+    private List<Crime> items = new ArrayList<>();
     private Listener listener;
 
     private final DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
 
     public CrimeListAdapter() {
-        this.items = new ArrayList<>();
     }
 
     public void setListener(Listener listener) {
@@ -52,6 +51,7 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.View
 
         String date = dateFormat.format(item.getCalendar().getTime());
         viewHolder.date.setText(date);
+
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

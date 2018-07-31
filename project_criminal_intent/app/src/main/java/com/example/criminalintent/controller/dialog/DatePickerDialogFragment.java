@@ -64,7 +64,6 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
                         if (listener != null) {
                             listener.onNewDateChosen(newCalendar);
                         }
-
 //                        Fragment parentFragment = getParentFragment();
 //                        if (parentFragment != null && parentFragment instanceof CrimeFragment) {
 //                            CrimeFragment crimeFragment = (CrimeFragment) parentFragment;

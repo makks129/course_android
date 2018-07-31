@@ -1,9 +1,13 @@
 package com.example.criminalintent.controller.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,6 +19,7 @@ import com.example.criminalintent.controller.fragment.base.BaseFragment;
 import com.example.criminalintent.model.Crime;
 import com.example.criminalintent.model.CrimeLab;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // TODO add divider line between list items
@@ -22,6 +27,12 @@ public class CrimeListFragment extends BaseFragment {
 
     private CrimeListAdapter adapter;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle state) {
+        super.onCreate(state);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,4 +65,25 @@ public class CrimeListFragment extends BaseFragment {
         super.onResume();
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.crime_list, menu);
+    }
+
+    // TODO create new crime in CrimeActivity, when you press save
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.newCrime:
+                Crime crime = new Crime();
+                CrimeLab.getInstance().addCrime(crime);
+                CrimeActivity.start(getActivity(), crime.getUuid());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

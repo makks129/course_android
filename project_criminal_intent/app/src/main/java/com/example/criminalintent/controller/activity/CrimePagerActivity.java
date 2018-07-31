@@ -9,8 +9,10 @@ import android.support.v4.view.ViewPager;
 import com.example.criminalintent.R;
 import com.example.criminalintent.controller.adapter.CrimePagerAdapter;
 import com.example.criminalintent.controller.activity.base.BaseActivity;
+import com.example.criminalintent.model.Crime;
 import com.example.criminalintent.model.CrimeLab;
 
+import java.util.List;
 import java.util.UUID;
 
 // TODO add buttons to jump to first and last crime
@@ -29,7 +31,8 @@ public class CrimePagerActivity extends BaseActivity {
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         adapter = new CrimePagerAdapter(getSupportFragmentManager());
-        adapter.setItems(CrimeLab.getInstance().getCrimes());
+        List<Crime> crimes = CrimeLab.getInstance().getCrimes();
+        adapter.setItems(crimes);
         viewPager.setAdapter(adapter);
 
         int crimeIndex = CrimeLab.getInstance().getCrimeIndex(crimeId);

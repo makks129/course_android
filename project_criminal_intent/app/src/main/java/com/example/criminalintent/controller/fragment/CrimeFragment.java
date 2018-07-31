@@ -1,12 +1,11 @@
 package com.example.criminalintent.controller.fragment;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -15,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.criminalintent.R;
-import com.example.criminalintent.controller.activity.CrimeActivity;
 import com.example.criminalintent.controller.dialog.DatePickerDialogFragment;
 import com.example.criminalintent.controller.fragment.base.BaseFragment;
 import com.example.criminalintent.model.Crime;
@@ -52,8 +50,6 @@ public class CrimeFragment extends BaseFragment {
         super.onCreate(state);
         UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
         crime = CrimeLab.getInstance().getCrime(crimeId);
-
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -77,8 +73,10 @@ public class CrimeFragment extends BaseFragment {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 DatePickerDialogFragment dialog = DatePickerDialogFragment.getInstance(crime.getCalendar());
                 dialog.show(getChildFragmentManager(), DATE_PICKED_DIALOG_TAG);
+
             }
         });
 
@@ -114,22 +112,4 @@ public class CrimeFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.crime_list, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.newCrime:
-                Crime crime = new Crime();
-                CrimeLab.getInstance().addCrime(crime);
-                CrimeActivity.start(getActivity(), crime.getUuid());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

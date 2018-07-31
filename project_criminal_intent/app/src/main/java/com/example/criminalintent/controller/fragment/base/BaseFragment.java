@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.criminalintent.controller.activity.CrimeActivity;
+
 public abstract class BaseFragment extends Fragment {
 
     private static final String TAG = "TAG_" + BaseFragment.class.getSimpleName();
