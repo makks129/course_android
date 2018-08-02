@@ -2,12 +2,13 @@ package com.example.criminalintent.model;
 
 import com.example.criminalintent.controller.App;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
 public class CrimeLab {
+
+    private CrimeLab() {
+    }
 
     private static class SingletonHolder {
         private static final CrimeLab INSTANCE = new CrimeLab();
@@ -18,9 +19,6 @@ public class CrimeLab {
     }
 
     private List<Crime> crimes;
-
-    private CrimeLab() {
-    }
 
     public List<Crime> getCrimes() {
         if (crimes == null) {
@@ -56,5 +54,6 @@ public class CrimeLab {
     public void updateCrime(Crime crime) {
         App.getDatabaseHelper().getCrimeTable().updateCrime(crime);
     }
+
 
 }

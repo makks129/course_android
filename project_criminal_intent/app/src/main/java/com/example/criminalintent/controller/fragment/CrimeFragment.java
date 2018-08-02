@@ -1,6 +1,8 @@
 package com.example.criminalintent.controller.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,10 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.criminalintent.R;
+import com.example.criminalintent.controller.Ctxt;
 import com.example.criminalintent.controller.dialog.DatePickerDialogFragment;
 import com.example.criminalintent.controller.fragment.base.BaseFragment;
 import com.example.criminalintent.model.Crime;
 import com.example.criminalintent.model.CrimeLab;
+import com.example.criminalintent.model.prefs.Prefs;
 import com.example.criminalintent.view.MyTextWatcher;
 
 import java.text.DateFormat;
@@ -28,6 +32,8 @@ public class CrimeFragment extends BaseFragment {
 
     private static final String EXTRA_CRIME_ID = "EXTRA_CRIME_ID";
     private static final String DATE_PICKED_DIALOG_TAG = "DATE_PICKED_DIALOG_TAG";
+
+    public static final String PREFS_LAST_CRIME_ID = "PREFS_LAST_CRIME_ID";
 
     private final DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
 
@@ -115,5 +121,11 @@ public class CrimeFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         CrimeLab.getInstance().updateCrime(crime);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Prefs.save(PREFS_LAST_CRIME_ID, crime.getUuid().toString());
     }
 }

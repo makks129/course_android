@@ -21,6 +21,7 @@ public class App extends Application {
         databaseHelper = new DatabaseHelper(this);
     }
 
+
     public static App get() {
         return app;
     }

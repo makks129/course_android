@@ -1,6 +1,8 @@
 package com.example.criminalintent.controller.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +20,11 @@ import com.example.criminalintent.controller.activity.CrimePagerActivity;
 import com.example.criminalintent.controller.fragment.base.BaseFragment;
 import com.example.criminalintent.model.Crime;
 import com.example.criminalintent.model.CrimeLab;
+import com.example.criminalintent.model.prefs.Prefs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 // TODO add divider line between list items
 public class CrimeListFragment extends BaseFragment {
@@ -57,7 +61,17 @@ public class CrimeListFragment extends BaseFragment {
         adapter.setItems(crimes);
         rv.setAdapter(adapter);
 
+        scrollToLastSeenCrime(rv);
+
         return view;
+    }
+
+    private void scrollToLastSeenCrime(RecyclerView rv) {
+        String id = Prefs.getString(CrimeFragment.PREFS_LAST_CRIME_ID);
+        if (id != null) {
+            int index = CrimeLab.getInstance().getCrimeIndex(UUID.fromString(id));
+            rv.scrollToPosition(index);
+        }
     }
 
     @Override

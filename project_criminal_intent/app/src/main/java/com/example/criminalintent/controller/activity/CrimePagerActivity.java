@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.widget.TextView;
 
 import com.example.criminalintent.R;
+import com.example.criminalintent.controller.Ctxt;
 import com.example.criminalintent.controller.adapter.CrimePagerAdapter;
 import com.example.criminalintent.controller.activity.base.BaseActivity;
 import com.example.criminalintent.model.Crime;
