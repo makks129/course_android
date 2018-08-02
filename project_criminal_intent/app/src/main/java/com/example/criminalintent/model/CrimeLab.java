@@ -1,5 +1,7 @@
 package com.example.criminalintent.model;
 
+import com.example.criminalintent.controller.App;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -7,35 +9,24 @@ import java.util.UUID;
 
 public class CrimeLab {
 
-    private static CrimeLab crimeLab;
+    private static class SingletonHolder {
+        private static final CrimeLab INSTANCE = new CrimeLab();
+    }
 
     public static CrimeLab getInstance() {
-        if (crimeLab == null) {
-            crimeLab = new CrimeLab();
-        }
-        return crimeLab;
+        return SingletonHolder.INSTANCE;
     }
 
     private List<Crime> crimes;
 
     private CrimeLab() {
-        crimes = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            Crime crime = new Crime();
-            crime.setTitle("Title " + i);
-            crime.setCalendar(Calendar.getInstance());
-            crime.setSolved(i % 2 == 0);
-            crimes.add(crime);
-        }
     }
 
-    public Crime getCrime(UUID crimeId) {
-        for (Crime crime : crimes) {
-            if (crime.getUuid().equals(crimeId)) {
-                return crime;
-            }
+    public List<Crime> getCrimes() {
+        if (crimes == null) {
+            crimes = App.getDatabaseHelper().getCrimeTable().getCrimes();
         }
-        return null;
+        return crimes;
     }
 
     public int getCrimeIndex(UUID crimeId) {
@@ -48,15 +39,22 @@ public class CrimeLab {
         return 0;
     }
 
+    public Crime getCrime(UUID crimeId) {
+        for (Crime crime : crimes) {
+            if (crime.getUuid().equals(crimeId)) {
+                return crime;
+            }
+        }
+        return null;
+    }
+
     public void addCrime(Crime crime) {
         crimes.add(crime);
+        App.getDatabaseHelper().getCrimeTable().addCrime(crime);
     }
 
-    public List<Crime> getCrimes() {
-        return crimes;
+    public void updateCrime(Crime crime) {
+        App.getDatabaseHelper().getCrimeTable().updateCrime(crime);
     }
 
-    public void setCrimes(List<Crime> crimes) {
-        this.crimes = crimes;
-    }
 }

@@ -1,4 +1,4 @@
-package com.example.criminalintent.controller.fragment.base;
+package com.example.test_async;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.criminalintent.controller.activity.CrimeActivity;
 
 public abstract class BaseFragment extends Fragment {
 

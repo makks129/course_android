@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.example.criminalintent.controller.fragment.CrimeFragment;
 import com.example.criminalintent.controller.activity.base.SingleFragmentActivity;
+import com.example.criminalintent.controller.fragment.CrimeFragment;
 
 import java.util.UUID;
 
@@ -24,7 +24,6 @@ public class CrimeActivity extends SingleFragmentActivity {
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         context.startActivity(intent);
     }
-
 
 
 }

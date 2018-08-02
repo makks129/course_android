@@ -17,6 +17,10 @@ public class Crime {
         solved = false;
     }
 
+    public Crime(UUID uuid) {
+        this.uuid = uuid;
+    }
+
     public UUID getUuid() {
         return uuid;
     }

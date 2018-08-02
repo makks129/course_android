@@ -1,7 +1,5 @@
 package com.example.criminalintent.controller.fragment;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
+// TODO add functionality to delete a crime
 public class CrimeFragment extends BaseFragment {
 
     private static final String EXTRA_CRIME_ID = "EXTRA_CRIME_ID";
@@ -112,4 +111,9 @@ public class CrimeFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.getInstance().updateCrime(crime);
+    }
 }
