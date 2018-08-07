@@ -1,7 +1,9 @@
-package com.example.test_async;
+package com.example.test_async.rx;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+
+import com.example.test_async.base.SingleFragmentActivity;
 
 public class TestRxActivity extends SingleFragmentActivity {
     @Override

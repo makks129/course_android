@@ -1,9 +1,11 @@
-package com.example.test_async;
+package com.example.test_async.base;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
+import com.example.test_async.R;
 
 public abstract class SingleFragmentActivity extends BaseActivity {
 

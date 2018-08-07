@@ -16,16 +16,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestAsyncTaskActivity" />
-        <activity android:name=".TestJavaThreadActivity" />
-        <activity android:name=".TestIntentServiceActivity" />
-        <activity android:name=".TestRxActivity" />
+        <activity android:name=".async_task.TestAsyncTaskActivity" />
+        <activity android:name=".java_thread.TestJavaThreadActivity" />
+        <activity android:name=".intent_service.TestIntentServiceActivity" />
+        <activity android:name=".rx.TestRxActivity" />
 
         <!--exported="false" means it's only available for our app-->
         <service
             android:name=".async.TestIntentService"
             android:exported="false"
             />
+
+        <receiver android:name=".OnBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

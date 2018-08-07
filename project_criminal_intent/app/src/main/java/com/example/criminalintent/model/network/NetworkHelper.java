@@ -19,4 +19,5 @@ public class NetworkHelper {
     public CrimeApi getCrimeApi() {
         return crimeApi;
     }
+
 }

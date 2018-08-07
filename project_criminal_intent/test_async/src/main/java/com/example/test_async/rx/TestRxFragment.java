@@ -1,14 +1,15 @@
-package com.example.test_async;
+package com.example.test_async.rx;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.test_async.R;
 import com.example.test_async.async.AsyncUtils;
+import com.example.test_async.base.BaseFragment;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -16,6 +17,8 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class TestRxFragment extends BaseFragment {
@@ -27,7 +30,7 @@ public class TestRxFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle state) {
         super.onCreate(state);
-//        setRetainInstance(true);
+        setRetainInstance(true);
     }
 
     @Override
@@ -38,16 +41,16 @@ public class TestRxFragment extends BaseFragment {
         text = view.findViewById(R.id.text);
 
         Observable
-                .create(new ObservableOnSubscribe<String>() {
+                .create(new ObservableOnSubscribe<Integer>() {
                     @Override
-                    public void subscribe(ObservableEmitter<String> emitter) {
+                    public void subscribe(ObservableEmitter<Integer> emitter) {
                         for (int i = 0; i < 100; i++) {
                             if (emitter.isDisposed()) {
                                 emitter.onComplete();
                                 return;
                             }
                             AsyncUtils.sleep(100);
-                            emitter.onNext("" + i);
+                            emitter.onNext(i);
 //                            if (i == 15) {
 //                                throw new RuntimeException("BOOM!");
 //                            }
@@ -57,7 +60,7 @@ public class TestRxFragment extends BaseFragment {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
+                .subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         taskDisposable = d;
@@ -65,8 +68,8 @@ public class TestRxFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(String s) {
-                        text.append(s + " ");
+                    public void onNext(Integer i) {
+                        text.append(i + " ");
                     }
 
                     @Override

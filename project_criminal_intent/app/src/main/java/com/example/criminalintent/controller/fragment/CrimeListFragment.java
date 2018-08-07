@@ -75,7 +75,7 @@ public class CrimeListFragment extends BaseFragment {
 //            e.printStackTrace();
 //        }
 
-        // Async
+//         Async
 //        call.enqueue(new Callback<List<Crime>>() {
 //            @Override
 //            public void onResponse(Call<List<Crime>> call, Response<List<Crime>> response) {

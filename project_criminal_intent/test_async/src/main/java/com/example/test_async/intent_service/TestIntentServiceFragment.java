@@ -1,4 +1,4 @@
-package com.example.test_async;
+package com.example.test_async.intent_service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.test_async.R;
 import com.example.test_async.async.TestIntentService;
+import com.example.test_async.base.BaseFragment;
 
 public class TestIntentServiceFragment extends BaseFragment {
 

@@ -3,7 +3,6 @@ package com.example.criminalintent.model;
 import com.example.criminalintent.controller.App;
 
 import java.util.List;
-import java.util.UUID;
 
 public class CrimeLab {
 
@@ -46,7 +45,7 @@ public class CrimeLab {
         return null;
     }
 
-    public void addCrime(Crime crime) {
+    public void addCrime(final Crime crime) {
         crimes.add(crime);
         App.getDatabaseHelper().getCrimeTable().addCrime(crime);
     }
@@ -54,6 +53,5 @@ public class CrimeLab {
     public void updateCrime(Crime crime) {
         App.getDatabaseHelper().getCrimeTable().updateCrime(crime);
     }
-
 
 }

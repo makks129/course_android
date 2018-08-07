@@ -1,4 +1,4 @@
-package com.example.test_async;
+package com.example.test_async.java_thread;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.test_async.R;
 import com.example.test_async.async.AsyncUtils;
+import com.example.test_async.base.BaseFragment;
 
 public class TestJavaThreadFragment extends BaseFragment {
 
@@ -34,10 +36,19 @@ public class TestJavaThreadFragment extends BaseFragment {
 
 
     private void runThreadTask() {
-        text.setText("Start! ");
         new Thread(new Runnable() {
             @Override
             public void run() {
+
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            text.setText("Start! ");
+                        }
+                    });
+                }
+
                 for (int i = 0; i < 100; i++) {
                     final int finalI = i;
                     if (getActivity() != null) {
@@ -50,6 +61,8 @@ public class TestJavaThreadFragment extends BaseFragment {
                     }
                     AsyncUtils.sleep(50);
                 }
+
+
                 if (getActivity() != null) {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -58,6 +71,7 @@ public class TestJavaThreadFragment extends BaseFragment {
                         }
                     });
                 }
+
             }
         }).start();
     }
