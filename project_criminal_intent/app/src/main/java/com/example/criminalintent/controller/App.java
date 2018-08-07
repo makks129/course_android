@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.criminalintent.model.db.DatabaseHelper;
+import com.example.criminalintent.model.network.NetworkHelper;
 
 public class App extends Application {
 
@@ -11,6 +12,7 @@ public class App extends Application {
 
     private static App app;
     private DatabaseHelper databaseHelper;
+    private NetworkHelper networkHelper;
 
     @Override
     public void onCreate() {
@@ -19,6 +21,7 @@ public class App extends Application {
 
         app = this;
         databaseHelper = new DatabaseHelper(this);
+        networkHelper = new NetworkHelper();
     }
 
 
@@ -28,6 +31,10 @@ public class App extends Application {
 
     public static DatabaseHelper getDatabaseHelper() {
         return get().databaseHelper;
+    }
+
+    public static NetworkHelper getNetworkHelper() {
+        return get().networkHelper;
     }
 
     @Override

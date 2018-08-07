@@ -15,11 +15,11 @@ public class CrimeActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment(Intent intent) {
-        UUID crimeId = (UUID) intent.getSerializableExtra(EXTRA_CRIME_ID);
+        String crimeId = intent.getStringExtra(EXTRA_CRIME_ID);
         return CrimeFragment.newInstance(crimeId);
     }
 
-    public static void start(Context context, UUID crimeId) {
+    public static void start(Context context, String crimeId) {
         Intent intent = new Intent(context, CrimeActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         context.startActivity(intent);

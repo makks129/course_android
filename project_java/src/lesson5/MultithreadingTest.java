@@ -5,21 +5,11 @@ public class MultithreadingTest {
     public static void main(String[] args) {
 
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 100; i++) {
-                    System.out.println("thread_" + i);
-                }
-            }
-        });
-        thread.start();
-
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 100; i++) {
-                    System.out.println("thread1_" + i);
+                    System.out.println("thread_" + i);
                 }
             }
         });
@@ -29,11 +19,21 @@ public class MultithreadingTest {
             @Override
             public void run() {
                 for (int i = 0; i < 100; i++) {
-                    System.out.println("thread2_" + i);
+                    System.out.println("thread1_" + i);
                 }
             }
         });
         thread2.start();
+
+        Thread thread3 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println("thread2_" + i);
+                }
+            }
+        });
+        thread3.start();
 
 
 

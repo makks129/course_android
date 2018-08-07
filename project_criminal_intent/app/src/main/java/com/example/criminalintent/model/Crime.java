@@ -1,28 +1,30 @@
 package com.example.criminalintent.model;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 public class Crime {
 
-    private UUID uuid;
+    private String id;
     private String title;
-    private Calendar calendar;
+    private long dateTime;
     private boolean solved;
+    private String imageUrl;
 
     public Crime() {
-        uuid = UUID.randomUUID();
+        id = UUID.randomUUID().toString();
         title = "";
-        calendar = Calendar.getInstance();
+        dateTime = new Date().getTime();
         solved = false;
+        imageUrl = "";
     }
 
-    public Crime(UUID uuid) {
-        this.uuid = uuid;
+    public Crime(String id) {
+        this.id = id;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -33,12 +35,12 @@ public class Crime {
         this.title = title;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
+    public long getDateTime() {
+        return dateTime;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
+    public void setDateTime(long dateTime) {
+        this.dateTime = dateTime;
     }
 
     public boolean isSolved() {
@@ -47,5 +49,13 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         this.solved = solved;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

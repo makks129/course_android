@@ -1,9 +1,7 @@
 package com.example.test_async;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +10,6 @@ import android.widget.TextView;
 import com.example.test_async.async.AsyncUtils;
 
 public class TestJavaThreadFragment extends BaseFragment {
-
-    private static final String TAG = "TAG_" + TestJavaThreadFragment.class.getSimpleName();
 
     private TextView text;
 
@@ -52,9 +48,16 @@ public class TestJavaThreadFragment extends BaseFragment {
                             }
                         });
                     }
-                    AsyncUtils.sleep(100);
+                    AsyncUtils.sleep(50);
                 }
-                text.append("Finish!");
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            text.append("Finish!");
+                        }
+                    });
+                }
             }
         }).start();
     }

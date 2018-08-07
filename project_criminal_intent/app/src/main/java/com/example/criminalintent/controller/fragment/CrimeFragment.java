@@ -1,8 +1,6 @@
 package com.example.criminalintent.controller.fragment;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.criminalintent.R;
-import com.example.criminalintent.controller.Ctxt;
 import com.example.criminalintent.controller.dialog.DatePickerDialogFragment;
 import com.example.criminalintent.controller.fragment.base.BaseFragment;
 import com.example.criminalintent.model.Crime;
@@ -42,9 +39,9 @@ public class CrimeFragment extends BaseFragment {
     private TextView date;
 
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+    public static CrimeFragment newInstance(String crimeId) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_CRIME_ID, crimeId);
+        args.putString(EXTRA_CRIME_ID, crimeId);
         CrimeFragment fragment = new CrimeFragment();
         fragment.setArguments(args);
         return fragment;
@@ -53,7 +50,7 @@ public class CrimeFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle state) {
         super.onCreate(state);
-        UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
+        String crimeId = getArguments().getString(EXTRA_CRIME_ID);
         crime = CrimeLab.getInstance().getCrime(crimeId);
     }
 
@@ -79,7 +76,7 @@ public class CrimeFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-                DatePickerDialogFragment dialog = DatePickerDialogFragment.getInstance(crime.getCalendar());
+                DatePickerDialogFragment dialog = DatePickerDialogFragment.getInstance(crime.getDateTime());
                 dialog.show(getChildFragmentManager(), DATE_PICKED_DIALOG_TAG);
 
             }
@@ -98,7 +95,7 @@ public class CrimeFragment extends BaseFragment {
     }
 
     private void updateDate() {
-        String dateTime = dateFormat.format(crime.getCalendar().getTime());
+        String dateTime = dateFormat.format(crime.getDateTime());
         date.setText(dateTime);
     }
 
@@ -109,8 +106,8 @@ public class CrimeFragment extends BaseFragment {
             DatePickerDialogFragment datePickerDialogFragment = (DatePickerDialogFragment) childFragment;
             datePickerDialogFragment.setListener(new DatePickerDialogFragment.Listener() {
                 @Override
-                public void onNewDateChosen(Calendar newCalendar) {
-                    crime.setCalendar(newCalendar);
+                public void onNewDateChosen(long dateTime) {
+                    crime.setDateTime(dateTime);
                     updateDate();
                 }
             });
@@ -126,6 +123,6 @@ public class CrimeFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Prefs.save(PREFS_LAST_CRIME_ID, crime.getUuid().toString());
+        Prefs.save(PREFS_LAST_CRIME_ID, crime.getId());
     }
 }

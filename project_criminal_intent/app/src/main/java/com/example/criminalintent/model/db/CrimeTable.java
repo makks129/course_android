@@ -8,27 +8,27 @@ import android.support.annotation.NonNull;
 import com.example.criminalintent.model.Crime;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
 
 public class CrimeTable extends DatabaseTable {
 
     static final String TABLE_NAME = "crimes";
 
-    static final String ID = "uuid";
+    static final String ID = "id";
     static final String TITLE = "title";
-    static final String TIME = "time";
+    static final String DATE_TIME = "date_time";
     static final String SOLVED = "solved";
+    static final String IMAGE_URL = "image_url";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +
-                " _id integer PRIMARY KEY AUTOINCREMENT, " +
+                " id_primary_key_autoincrement integer PRIMARY KEY AUTOINCREMENT, " +
                 ID + ", " +
                 TITLE + ", " +
-                TIME + ", " +
+                DATE_TIME + ", " +
                 SOLVED +
+                IMAGE_URL +
                 ")");
     }
 
@@ -43,16 +43,16 @@ public class CrimeTable extends DatabaseTable {
     }
 
     public void updateCrime(Crime crime) {
-        String uuidString = crime.getUuid().toString();
+        String idString = crime.getId();
         ContentValues values = getContentValues(crime);
         getDb().update(TABLE_NAME, values,
-                ID + " = ?", new String[]{uuidString}); // SQL injection defence
+                ID + " = ?", new String[]{idString}); // SQL injection defence
     }
 
-    public Crime getCrime(UUID uuid) {
+    public Crime getCrime(String id) {
         Cursor cursor = queryCrimes(
                 ID + " = ?",
-                new String[]{uuid.toString()}
+                new String[]{id}
         );
         try {
             if (cursor.getCount() > 0) {
@@ -86,18 +86,17 @@ public class CrimeTable extends DatabaseTable {
     }
 
     private Crime getCrimeFromCursor(Cursor c) {
-        String uuidString = c.getString(c.getColumnIndex(ID));
+        String idString = c.getString(c.getColumnIndex(ID));
         String title = c.getString(c.getColumnIndex(TITLE));
-        long time = c.getLong(c.getColumnIndex(TIME));
+        long dateTime = c.getLong(c.getColumnIndex(DATE_TIME));
         int isSolved = c.getInt(c.getColumnIndex(SOLVED));
+        String imageUrl = c.getString(c.getColumnIndex(IMAGE_URL));
 
-        UUID uuid = UUID.fromString(uuidString);
-        Crime crime = new Crime(uuid);
+        Crime crime = new Crime(idString);
         crime.setTitle(title);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(time);
-        crime.setCalendar(calendar);
+        crime.setDateTime(dateTime);
         crime.setSolved(isSolved != 0);
+        crime.setImageUrl(imageUrl);
         return crime;
     }
 
@@ -116,10 +115,11 @@ public class CrimeTable extends DatabaseTable {
     @NonNull
     private ContentValues getContentValues(Crime crime) {
         ContentValues values = new ContentValues();
-        values.put(ID, crime.getUuid().toString());
+        values.put(ID, crime.getId());
         values.put(TITLE, crime.getTitle());
-        values.put(TIME, crime.getCalendar().getTimeInMillis());
+        values.put(DATE_TIME, crime.getDateTime());
         values.put(SOLVED, crime.isSolved() ? 1 : 0);
+        values.put(IMAGE_URL, crime.getImageUrl());
         return values;
     }
 

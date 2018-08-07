@@ -29,7 +29,7 @@ public class CrimePagerActivity extends BaseActivity {
         super.onCreate(state);
         setContentView(R.layout.activity_crime_pager);
 
-        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+        String crimeId = getIntent().getStringExtra(EXTRA_CRIME_ID);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         adapter = new CrimePagerAdapter(getSupportFragmentManager());
@@ -42,7 +42,7 @@ public class CrimePagerActivity extends BaseActivity {
 
     }
 
-    public static void start(Context context, UUID crimeId) {
+    public static void start(Context context, String crimeId) {
         Intent intent = new Intent(context, CrimePagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         context.startActivity(intent);

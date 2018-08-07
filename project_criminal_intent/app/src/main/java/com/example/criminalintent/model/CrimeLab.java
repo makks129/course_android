@@ -27,19 +27,19 @@ public class CrimeLab {
         return crimes;
     }
 
-    public int getCrimeIndex(UUID crimeId) {
+    public int getCrimeIndex(String crimeId) {
         for (int i = 0; i < crimes.size(); i++) {
             Crime crime = crimes.get(i);
-            if (crime.getUuid().equals(crimeId)) {
+            if (crime.getId().equals(crimeId)) {
                 return i;
             }
         }
         return 0;
     }
 
-    public Crime getCrime(UUID crimeId) {
+    public Crime getCrime(String crimeId) {
         for (Crime crime : crimes) {
-            if (crime.getUuid().equals(crimeId)) {
+            if (crime.getId().equals(crimeId)) {
                 return crime;
             }
         }

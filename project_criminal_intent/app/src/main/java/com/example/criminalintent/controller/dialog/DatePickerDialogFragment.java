@@ -17,15 +17,15 @@ import java.util.Calendar;
 
 public class DatePickerDialogFragment extends BaseDialogFragment {
 
-    private static final String EXTRA_DATE = "EXTRA_DATE";
+    private static final String EXTRA_DATE_TIME = "EXTRA_DATE_TIME";
 
-    private Calendar calendar;
+    private long dateTime;
     private Listener listener;
 
 
-    public static DatePickerDialogFragment getInstance(Calendar calendar) {
+    public static DatePickerDialogFragment getInstance(long dateTime) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_DATE, calendar);
+        args.putLong(EXTRA_DATE_TIME, dateTime);
         DatePickerDialogFragment fragment = new DatePickerDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -34,7 +34,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle state) {
         super.onCreate(state);
-        calendar = (Calendar) getArguments().getSerializable(EXTRA_DATE);
+        dateTime = getArguments().getLong(EXTRA_DATE_TIME);
     }
 
     @NonNull
@@ -45,6 +45,8 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_date_picker, null);
         final DatePicker datePicker = view.findViewById(R.id.datePicker);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(dateTime);
         datePicker.init(
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -62,7 +64,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
                         newCalendar.set(Calendar.DAY_OF_MONTH, datePicker.getDayOfMonth());
 
                         if (listener != null) {
-                            listener.onNewDateChosen(newCalendar);
+                            listener.onNewDateChosen(newCalendar.getTimeInMillis());
                         }
 //                        Fragment parentFragment = getParentFragment();
 //                        if (parentFragment != null && parentFragment instanceof CrimeFragment) {
@@ -81,6 +83,6 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
     }
 
     public interface Listener {
-        void onNewDateChosen(Calendar newCalendar);
+        void onNewDateChosen(long newDateTime);
     }
 }

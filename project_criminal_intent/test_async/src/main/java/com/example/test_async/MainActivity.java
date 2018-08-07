@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
         testRx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Not implemented yet", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(MainActivity.this, TestRxActivity.class));
+                startActivity(new Intent(MainActivity.this, TestRxActivity.class));
             }
         });
 

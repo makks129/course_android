@@ -49,7 +49,7 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.View
 
         viewHolder.title.setText(item.getTitle());
 
-        String date = dateFormat.format(item.getCalendar().getTime());
+        String date = dateFormat.format(item.getDateTime());
         viewHolder.date.setText(date);
 
 

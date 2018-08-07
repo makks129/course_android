@@ -9,7 +9,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Increment version when you have to apply changes to the database structure
      */
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
     private static final String DB_NAME = "main.db";
 
     private DatabaseTable[] tables;

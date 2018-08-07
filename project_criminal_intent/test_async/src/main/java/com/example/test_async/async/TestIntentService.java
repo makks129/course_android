@@ -28,7 +28,7 @@ public class TestIntentService extends BaseIntentService {
             progressIntent.putExtra(EXTRA_PROGRESS, i);
             localBroadcastManager.sendBroadcast(progressIntent);
 
-            AsyncUtils.sleep(100);
+            AsyncUtils.sleep(50);
         }
 
         Intent finishIntent = new Intent(ACTION_FINISH);

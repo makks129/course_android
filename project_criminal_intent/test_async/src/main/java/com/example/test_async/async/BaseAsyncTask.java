@@ -17,13 +17,13 @@ public abstract class BaseAsyncTask<Params, Progress, Result> extends AsyncTask<
 
     @Override
     protected Result doInBackground(Params... params) {
-        Log.d(TAG, "doInBackground: params = " + Arrays.toString(params));
+        Log.d(TAG, "doInBackground: params = " + (params != null ? Arrays.toString(params) : null));
         return null;
     }
 
     @Override
     protected void onProgressUpdate(Progress... values) {
-        Log.d(TAG, "onProgressUpdate: values = " + Arrays.toString(values));
+        Log.d(TAG, "onProgressUpdate: values = " + (values != null ? Arrays.toString(values) : null));
         super.onProgressUpdate(values);
     }
 
@@ -35,13 +35,13 @@ public abstract class BaseAsyncTask<Params, Progress, Result> extends AsyncTask<
 
     @Override
     protected void onCancelled(Result result) {
-        Log.d(TAG, "onCancelled: result = " + result.toString());
+        Log.d(TAG, "onCancelled: result = " + (result != null ? result.toString() : null));
         super.onCancelled(result);
     }
 
     @Override
     protected void onPostExecute(Result result) {
-        Log.d(TAG, "onPostExecute: result = " + result.toString());
+        Log.d(TAG, "onPostExecute: result = " + (result != null ? result.toString() : null));
         super.onPostExecute(result);
     }
 }

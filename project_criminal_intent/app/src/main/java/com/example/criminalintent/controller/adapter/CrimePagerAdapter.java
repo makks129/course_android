@@ -26,7 +26,7 @@ public class CrimePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int i) {
         Crime item = items.get(i);
-        return CrimeFragment.newInstance(item.getUuid());
+        return CrimeFragment.newInstance(item.getId());
     }
 
     @Override
